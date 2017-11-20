@@ -10,18 +10,22 @@ int main()
 	for (i = 0; i < n; i++)
 		scanf("%lld", &arr[i]);
 	
-	for (i = 0; i < n; i++)
+	while (pointerTwo < n)
 	{
-		sum = 0;
-		for (j = i; j < n; j++)
+		if (sum + arr[pointerTwo] > t )
 		{
-			if (sum + arr[j] > t)
-				break;
-			sum += arr[j];
+			sum -= arr[pointerOne];
+			if (maxBooks < pointerTwo - pointerOne)
+				maxBooks = pointerTwo - pointerOne;
+			pointerOne++;
 		}
-		if (maxBooks < j - i)
-			maxBooks = j - i;
+		else
+		{
+			sum += arr[pointerTwo];
+			pointerTwo++;
+		}
 	}
-
+	if (maxBooks < pointerTwo - pointerOne)
+		maxBooks = pointerTwo - pointerOne;
 	printf("%lld", maxBooks);
 }
