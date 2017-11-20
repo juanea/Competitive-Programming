@@ -1,40 +1,27 @@
-#include <bits\stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int a, i, n, t, arr[1010], flag;
+long long a, i,j, n, t, arr[100010], flag, maxBooks, sum, pointerOne, pointerTwo;
 
 int main()
 {
-	scanf("%d%d", &n, &t);
+	scanf("%lld%lld", &n, &t);
 	for (i = 0; i < n; i++)
-		scanf("%d", &arr[i]);
-	sort(arr, arr + n);
-
+		scanf("%lld", &arr[i]);
+	
 	for (i = 0; i < n; i++)
 	{
-		a += arr[i];
-		if (a > t)
+		sum = 0;
+		for (j = i; j < n; j++)
 		{
-			flag = 1;
-			break;
+			if (sum + arr[j] > t)
+				break;
+			sum += arr[j];
 		}
-		else if (a == t)
-		{
-			flag = 2;
-			break;
-		}
-		else if (i - 1 == n || flag == 0 && a < t)
-			flag = 3;
-
+		if (maxBooks < j - i)
+			maxBooks = j - i;
 	}
 
-	if (flag == 1)
-		printf("%d", i);
-	else if (flag == 2)
-		printf("%d", i + 1);
-	else if (flag == 3)
-		printf("%d", 1);
-	else
-		printf("%d", 0);
+	printf("%lld", maxBooks);
 }
